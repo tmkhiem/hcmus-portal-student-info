@@ -9,10 +9,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up wireguard
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' 
+          
+      - name: Set up dependencies
         run: |
            sudo apt update
            sudo apt install -y wireguard
+           sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
+           sudo pip install pyodbc 
 
       - name: Write file
         env: 
@@ -27,8 +34,3 @@ jobs:
            sleep 1
            sudo wg
 
-      - name: Test connection    
-        env:
-           DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
-        run: |
-           ping -c 5 "$DB_ENDPOINT_VPN"      
