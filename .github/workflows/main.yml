@@ -43,7 +43,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/scripts
           pip install --user pyodbc 
-          python main.py
+          python -u main.py
 
       - name: Test file
         run: |
