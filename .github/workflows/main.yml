@@ -22,11 +22,13 @@ jobs:
            sudo sed -n '6p' /etc/wireguard/wg0.conf
 
       - name: Start wireguard    
-        env:
-           DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
         run: |
            sudo wg-quick up wg0
            sleep 1
            sudo wg
 
-          
+      - name: Test connection    
+        env:
+           DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
+        run: |
+           ping -c 5 "$DB_ENDPOINT_VPN"      
