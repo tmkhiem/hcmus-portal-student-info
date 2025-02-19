@@ -29,13 +29,16 @@ jobs:
            WG_CONFIG: ${{ secrets.WG_CONFIG }}
         run: |
            sudo bash -c 'echo "$WG_CONFIG" > /etc/wireguard/wg0.conf'
-           sudo sed -n '6p' /etc/wireguard/wg0.conf
+           sudo sed -n '6p' /etc/wireguard/wg0.conf           
 
       - name: Start wireguard    
+        env:
+           DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
         run: |
            sudo wg-quick up wg0
-           sleep 1
            sudo wg
+           ping -c $DB_ENDPOINT_VPN
+           
            
       - name: Run Script
         env:
