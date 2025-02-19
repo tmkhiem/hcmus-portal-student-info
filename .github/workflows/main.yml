@@ -1,0 +1,21 @@
+name: Update Repository
+
+on:
+  repository_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up wireguard
+        run: |
+           apt update
+           apt install -y wireguard
+
+      - name: Write file
+        env: 
+          WG_CONFIG : ${{ secrets.WG_CONFIG }}
+        run: |
+           echo "$WG_CONFIG" > /etc/wireguard/wg0.conf
+           sed -n '6p' /etc/wireguard/wg0.conf.conf
