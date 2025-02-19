@@ -37,9 +37,6 @@ jobs:
            DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
         run: |
            sudo wg-quick up wg0
-           sudo wg
-           ping -c 10 $DB_ENDPOINT_VPN
-           
            
       - name: Run Script
         env:
@@ -48,8 +45,13 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/scripts
           pip install --user pyodbc 
-          python -u main.py 
+          python -u main.py
+          mv $GITHUB_WORKSPACE/scripts/index.html $GITHUB_WORKSPACE/index.html
 
-      - name: Test file
+      - name: Commit Changes
         run: |
-          echo $GITHUB_WORKSPACE/scripts/index.html
+          git config --global user.name "tmkhiem"
+          git config --global user.email "tmkhiem@users.noreply.github.com"
+          git add .
+          git commit -m "Autoupdate repository"
+          git push
