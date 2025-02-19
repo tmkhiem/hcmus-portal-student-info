@@ -18,5 +18,5 @@ jobs:
         env: 
           WG_CONFIG : ${{ secrets.WG_CONFIG }}
         run: |
-           sudo echo "$WG_CONFIG" > /etc/wireguard/wg0.conf
+           sudo bash -c 'echo "$WG_CONFIG" > /etc/wireguard/wg0.conf'
            sudo sed -n '6p' /etc/wireguard/wg0.conf.conf
