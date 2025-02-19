@@ -11,12 +11,12 @@ jobs:
     steps:
       - name: Set up wireguard
         run: |
-           apt update
-           apt install -y wireguard
+           sudo apt update
+           sudo apt install -y wireguard
 
       - name: Write file
         env: 
           WG_CONFIG : ${{ secrets.WG_CONFIG }}
         run: |
-           echo "$WG_CONFIG" > /etc/wireguard/wg0.conf
-           sed -n '6p' /etc/wireguard/wg0.conf.conf
+           sudo echo "$WG_CONFIG" > /etc/wireguard/wg0.conf
+           sudo sed -n '6p' /etc/wireguard/wg0.conf.conf
