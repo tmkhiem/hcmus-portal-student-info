@@ -26,6 +26,6 @@ jobs:
            DB_ENDPOINT_VPN: ${{ secrets.DB_ENDPOINT_VPN }}
         run: |
            sudo wg-quick up wg0
-           ping -c 1 $DB_ENDPOINT_VPN
+           ping -c 1 "$DB_ENDPOINT_VPN"
 
           
