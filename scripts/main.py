@@ -3,7 +3,9 @@ import pyodbc
 import json
 import datetime
 
-conn = pyodbc.connect(os.environ['DB_CONNECTION_STRING']) 
+connection_string = os.environ['DB_CONNECTION_STRING']
+print(connection_string[0:20])
+conn = pyodbc.connect(connection_string) 
 
 with conn.cursor() as cursor:
     cursor.execute(os.environ['DB_QUERY'])
