@@ -22,7 +22,6 @@ jobs:
            sudo apt update
            sudo apt install -y wireguard
            sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
-           sudo pip install --user pyodbc 
 
       - name: Write file
         env: 
@@ -43,6 +42,7 @@ jobs:
           DB_QUERY: ${{ secrets.DB_QUERY }}
         run: |
           cd $GITHUB_WORKSPACE/scripts
+          pip install --user pyodbc 
           python main.py
 
       - name: Test file
