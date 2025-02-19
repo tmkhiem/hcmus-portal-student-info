@@ -20,7 +20,6 @@ jobs:
           
       - name: Set up dependencies
         run: |
-           sudo apt update
            sudo apt install -y wireguard
            sudo ACCEPT_EULA=Y apt-get install msodbcsql18 -y
 
