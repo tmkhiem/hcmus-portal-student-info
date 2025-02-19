@@ -4,7 +4,6 @@ import json
 import datetime
 
 connection_string = os.environ['DB_CONNECTION_STRING']
-print(f'Script started: [{connection_string[1:44]}]')
 conn = pyodbc.connect(connection_string) 
 
 with conn.cursor() as cursor:
