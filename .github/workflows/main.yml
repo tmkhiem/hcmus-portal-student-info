@@ -1,8 +1,9 @@
 name: Update Repository
 
 on:
-  repository_dispatch:
   workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
 
 permissions:
   id-token: write
