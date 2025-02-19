@@ -29,7 +29,8 @@ jobs:
            WG_CONFIG: ${{ secrets.WG_CONFIG }}
         run: |
            sudo bash -c 'echo "$WG_CONFIG" > /etc/wireguard/wg0.conf'
-           sudo sed -n '6p' /etc/wireguard/wg0.conf           
+           echo 'Verifying WG config...'
+           sudo bash -c 'cat /etc/wireguard/wg0.conf | wc -l'           
 
       - name: Start wireguard    
         env:
