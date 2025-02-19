@@ -33,4 +33,15 @@ jobs:
            sudo wg-quick up wg0
            sleep 1
            sudo wg
+           
+      - name: Run Script
+        env:
+          DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+          DB_QUERY: ${{ secrets.DB_QUERY }}
+        run: |
+          cd $GITHUB_WORKSPACE/scripts
+          python main.py
 
+      - name: Test file
+        run: |
+          echo $GITHUB_WORKSPACE/scripts/index.html
